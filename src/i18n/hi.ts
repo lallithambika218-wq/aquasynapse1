@@ -1,0 +1,67 @@
+// Hindi (हिंदी) translations
+export default {
+    // Nav
+    dashboard: "डैशबोर्ड",
+    riskEngine: "जोखिम इंजन",
+    map: "जोखिम मानचित्र",
+    resources: "संसाधन",
+    shelters: "आश्रय",
+    simulation: "सिमुलेशन",
+    alerts: "अलर्ट",
+    history: "इतिहास",
+    offlineMode: "ऑफ़लाइन मोड",
+    settings: "सेटिंग्स",
+    home: "होम",
+    // KPIs
+    overallRiskScore: "समग्र जोखिम स्कोर",
+    decisionConfidence: "निर्णय विश्वास",
+    goldenHourIndex: "गोल्डन ऑवर इंडेक्स",
+    safeZones: "सुरक्षित क्षेत्र",
+    highRiskZones: "उच्च जोखिम क्षेत्र",
+    // Map
+    indiaRiskMap: "भारत जोखिम मानचित्र",
+    clickForDetails: "जानकारी के लिए क्लिक करें",
+    // Actions
+    actNow: "अभी कार्य करें!",
+    analyzeRisk: "जोखिम विश्लेषण",
+    sendSOS: "SOS",
+    exportData: "निर्यात",
+    executePlan: "योजना क्रियान्वित करें",
+    autoOptimize: "ऑटो-ऑप्टिमाइज़",
+    // Panels
+    quickAlerts: "त्वरित अलर्ट",
+    viewAll: "सभी देखें",
+    actionPlan: "कार्य योजना (AI)",
+    resourceAllocation: "संसाधन आवंटन",
+    shelterRecommendation: "आश्रय सिफारिश",
+    whatIfSimulation: "क्या-अगर सिमुलेशन",
+    riskProjection: "जोखिम अनुमान",
+    whyThisRisk: "यह जोखिम क्यों?",
+    deploymentReady: "तैनाती तैयार",
+    featureImportance: "फीचर महत्व",
+    // Status
+    online: "ऑनलाइन",
+    offline: "ऑफ़लाइन",
+    low: "कम",
+    medium: "मध्यम",
+    high: "उच्च",
+    critical: "गंभीर",
+    safe: "सुरक्षित",
+    warning: "चेतावनी",
+    operational: "सभी सिस्टम चालू",
+    // Table headers
+    shelterName: "आश्रय",
+    capacity: "क्षमता",
+    safety: "सुरक्षा",
+    distance: "दूरी",
+    // Hero
+    heroTitle: "बाढ़ से पहले भविष्यवाणी करें।",
+    heroSubtitle: "AI-आधारित आपदा इंटेलिजेंस प्लेटफॉर्म",
+    launchDashboard: "डैशबोर्ड खोलें",
+    viewArchitecture: "आर्किटेक्चर देखें",
+    // Misc
+    current: "वर्तमान",
+    after: "बाद में",
+    rainfallIntensity: "वर्षा तीव्रता",
+    disasterIntensity: "आपदा तीव्रता",
+}

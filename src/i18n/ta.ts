@@ -1,0 +1,67 @@
+// Tamil (தமிழ்) translations
+export default {
+    // Nav
+    dashboard: "டாஷ்போர்ட்",
+    riskEngine: "ஆபத்து இயந்திரம்",
+    map: "வரைபடம்",
+    resources: "வளங்கள்",
+    shelters: "தங்குமிடங்கள்",
+    simulation: "உருவகப்படுத்தல்",
+    alerts: "எச்சரிக்கைகள்",
+    history: "வரலாறு",
+    offlineMode: "ஆஃப்லைன்",
+    settings: "அமைப்புகள்",
+    home: "முகப்பு",
+    // KPIs
+    overallRiskScore: "மொத்த ஆபத்து மதிப்பெண்",
+    decisionConfidence: "நம்பிக்கை",
+    goldenHourIndex: "தங்க மணி நேரம்",
+    safeZones: "பாதுகாப்பான மண்டலங்கள்",
+    highRiskZones: "அதிக ஆபத்து மண்டலங்கள்",
+    // Map
+    indiaRiskMap: "இந்தியா ஆபத்து வரைபடம்",
+    clickForDetails: "விவரங்களுக்கு கிளிக் செய்யவும்",
+    // Actions
+    actNow: "இப்போது நடவடிக்கை!",
+    analyzeRisk: "ஆபத்தை பகுப்பாய்வு",
+    sendSOS: "SOS",
+    exportData: "ஏற்றுமதி",
+    executePlan: "திட்டத்தை செயல்படுத்து",
+    autoOptimize: "தானியங்கி மேம்படுத்தல்",
+    // Panels
+    quickAlerts: "வேகமான எச்சரிக்கைகள்",
+    viewAll: "அனைத்தையும் பார்",
+    actionPlan: "நடவடிக்கை திட்டம் (AI)",
+    resourceAllocation: "வளங்களின் ஒதுக்கீடு",
+    shelterRecommendation: "தங்குமிட பரிந்துரை",
+    whatIfSimulation: "என்ன-என்றால்",
+    riskProjection: "ஆபத்து அனுமானம்",
+    whyThisRisk: "ஏன் இந்த ஆபத்து?",
+    deploymentReady: "தொடக்கத்திற்கு தயார்",
+    featureImportance: "அம்சம் முக்கியத்துவம்",
+    // Status
+    online: "ஆன்லைன்",
+    offline: "ஆஃப்லைன்",
+    low: "குறைந்த",
+    medium: "நடுத்தர",
+    high: "உயர்",
+    critical: "கடுமையான",
+    safe: "பாதுகாப்பு",
+    warning: "எச்சரிக்கை",
+    operational: "அனைத்து அமைப்புகள் செயல்பாட்டு",
+    // Table headers
+    shelterName: "தங்குமிடம்",
+    capacity: "திறன்",
+    safety: "பாதுகாப்பு",
+    distance: "தூரம்",
+    // Hero
+    heroTitle: "வெள்ளத்திற்கு முன் கணிக்கவும்.",
+    heroSubtitle: "AI அடிப்படையிலான பேரிடர் புலனாய்வு தளம்",
+    launchDashboard: "டாஷ்போர்ட் தொடங்கவும்",
+    viewArchitecture: "கட்டமைப்பை பார்க்கவும்",
+    // Misc
+    current: "தற்போதைய",
+    after: "பிறகு",
+    rainfallIntensity: "மழை தீவிரம்",
+    disasterIntensity: "பேரிடர் தீவிரம்",
+}
