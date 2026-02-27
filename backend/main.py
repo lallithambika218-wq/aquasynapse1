@@ -20,20 +20,70 @@ import routes.resources as resources_router
 import routes.shelters as shelters_router
 import routes.history as history_router
 import routes.export as export_router
+from services.simulator import run_simulation_cycle, get_all_simulated_data
 
 # ─── Shared WebSocket Manager (singleton from services) ───────────────────────
 from services.connection_manager import manager
 
+# ─── Simulation Task Reference ─────────────────────────────────────────────────
+_simulation_task = None
+
 # ─── Lifespan ─────────────────────────────────────────────────────────────────
+
+async def background_simulation_loop():
+    """Background task that runs simulation every 2-3 minutes."""
+    while True:
+        try:
+            await asyncio.sleep(random.randint(120, 180))  # 2-3 minutes
+            
+            # Run simulation cycle
+            simulated_data = run_simulation_cycle()
+            
+            # Broadcast to all WebSocket clients
+            await manager.broadcast({
+                "type": "simulation_update",
+                "timestamp": simulated_data["timestamp"],
+                "average_risk_score": simulated_data["average_risk_score"],
+                "sos_alerts": simulated_data["sos_alerts"],
+                "resource_allocation": simulated_data.get("resources", {}),
+                "shelter_status": simulated_data.get("shelters", []),
+            })
+            
+            # Broadcast individual SOS alerts if any
+            for alert in simulated_data.get("sos_alerts", []):
+                await manager.broadcast({
+                    "type": "SOS_ALERT",
+                    "case_id": alert["case_id"],
+                    "zone": alert["zone"],
+                    "severity": alert["severity"],
+                    "message": alert["message"],
+                    "location": {
+                        "lat": alert["latitude"],
+                        "lng": alert["longitude"],
+                    },
+                    "timestamp": alert["timestamp"],
+                })
+        except Exception as e:
+            print(f"❌ Simulation error: {e}")
+            await asyncio.sleep(10)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    global _simulation_task
     print("\n🚀 AquaSynapse API starting up...")
     print("📦 Loading ML model...")
     load_model()
+    
+    # Start data simulation background task
+    print("🎬 Starting data simulation service...")
+    _simulation_task = asyncio.create_task(background_simulation_loop())
+    
     print("✅ API ready!\n")
     yield
+    
     print("🛑 AquaSynapse API shutting down...")
+    if _simulation_task:
+        _simulation_task.cancel()
 
 # ─── App ──────────────────────────────────────────────────────────────────────
 
@@ -90,6 +140,46 @@ async def health():
             "sms": "twilio_or_sim",
         }
     }
+
+# ─── Simulation Control Endpoints ──────────────────────────────────────────────
+
+@app.get("/api/simulation/status", tags=["Simulation"])
+async def get_simulation_status():
+    """Get current simulation state and all simulated data."""
+    return get_all_simulated_data()
+
+@app.post("/api/simulation/trigger", tags=["Simulation"])
+async def trigger_simulation():
+    """Manually trigger a simulation cycle and broadcast results."""
+    simulated_data = run_simulation_cycle()
+    
+    # Broadcast to all clients
+    await manager.broadcast({
+        "type": "simulation_update",
+        "timestamp": simulated_data["timestamp"],
+        "average_risk_score": simulated_data["average_risk_score"],
+        "sos_alerts": simulated_data["sos_alerts"],
+        "resource_allocation": simulated_data.get("resources", {}),
+        "shelter_status": simulated_data.get("shelters", []),
+    })
+    
+    return {
+        "status": "simulation triggered",
+        "data": simulated_data,
+    }
+
+@app.get("/api/simulation/toggle", tags=["Simulation"])
+async def toggle_simulation(enabled: bool = True):
+    """Enable or disable automatic simulation."""
+    global _simulation_task
+    if enabled and not _simulation_task:
+        _simulation_task = asyncio.create_task(background_simulation_loop())
+        return {"status": "simulation enabled"}
+    elif not enabled and _simulation_task:
+        _simulation_task.cancel()
+        _simulation_task = None
+        return {"status": "simulation disabled"}
+    return {"status": f"simulation already {'enabled' if enabled else 'disabled'}"}
 
 # ─── WebSocket: Primary SOS / Alert feed (/ws) ────────────────────────────────
 
